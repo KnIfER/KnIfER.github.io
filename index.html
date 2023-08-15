@@ -5,6 +5,48 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="vue.css">
+    <style>
+		.sidebar-toggle{
+			width: 100%!important;
+			display: flex;
+			justify-content: center;
+		}
+		#aboutP {
+		  position: fixed;
+		  bottom: 0;
+		  left: 0;
+		  width:100%;
+		  height:100%;
+		  z-index:4;
+		  display:none;
+		}
+		#about{
+		  height:auto;
+		  margin: 33px 10px 25px 10px;
+		}
+		#aboutDict{
+		  width:100%;
+		  margin: 25px 0 22px 0;
+		  text-align: center;
+		}
+		#aboutB::-webkit-scrollbar {
+		  display:none;
+		}
+		#aboutB{
+		  position: absolute;
+		  background: rgba(255, 255, 255, .93);
+		  width: 80%;
+		  height: auto;
+		  left: 10%;
+		  bottom: 5%;
+		  border-radius: 35px;
+		  min-height: 25%;
+		  max-height: 90%;    
+		  box-shadow: 0px 0px 9px 1px #dbdbdb9c;
+		  overflow-y: auto;
+		  filter: drop-shadow(2px 2px 6px #8f8fffef);
+		}
+    </style>
 </head>
 <body>
 <div id="app">我的应用集</div>
@@ -25,18 +67,162 @@
 	function gc(e,p){return (p||d).getElementsByClassName(e)[0]};
 	
 	
+    function gcs(c, d) {
+        return (d||document).getElementsByClassName(c);
+    }
+ 
+	function craft(t, c, p) {
+		var e=document.createElement(t||'DIV');
+		if(c)e.className=c;
+		if(p)p.appendChild(e);
+		return e;
+	}
 	
-	 var myPlugin = function (hook, vm) {
+    function stop(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+	
+	d.addEventListener('click', function(e){
+		debug('click', e, e.target);
+		var cc=3, t=e.target;
+		if(t.id=='aboutP') {
+			t.style.display="none";
+			stop(e);
+			return;
+		}
+		while(t.tagName!='A' && cc-->0) {
+			t=t.parentNode;
+		}
+		if(t.tagName=='A' && t.parentNode.tagName=='H1' && gc('sidebar').contains(t)) {
+			stop(e);
+			showAbout(t.parentNode.id);
+		}
+	}, true);
+	var aboutP;
+	function showAbout(id) {
+		var aboutPage = ge("about");
+		ge('aboutDict').innerText=id;
+		aboutP ||= ge('aboutP');
+		aboutP.style.display="block";
+		var host = aboutPage;
+		if(!host.shadow) {
+			if(host.attachShadow&&0) {
+				host.shadow = host.attachShadow({mode: 'open'});
+			} else {
+				host.shadow = host;
+			}
+			var cover=aboutP;
+			cover.onmousewheel=cover.onmouseup=cover.onclick=function(e) {
+				var e=e.srcElement;
+				if(e===cover && e.style.display!=='none') {
+					aboutPage.shadow.innerHTML='&nbsp;';
+					e.style.display='none';
+				}
+			};
+			 ge('aboutB').addEventListener('click', function(e){
+			 	//stop(e);
+				//data-pswp-width
+				var t = e.target;
+				
+			 }, true);
+			
+		}
+		var testUrl = 'https://www.runoob.com/images/pulpit.jpg';
+		craftIntro(host.shadow
+			, "<font color='blue'>无限星辰</font>词典app，用于离线查词，支持模糊搜索、正则搜索、搜索引擎。<br/><br/>"
+			, [testUrl
+			, testUrl
+			, testUrl
+			]);
+	}
+	
+	function craftIntro(p, head, imgs){
+		p.innerHTML=head;
+		var waitPS;
+		if(!window.PhotoSwipeLightbox) {
+			craft('SCRIPT', 0, p).src = 'photoswipe.umd.min.js';
+			waitPS = craft('SCRIPT', 0, p);
+			waitPS.src = 'photoswipe-lightbox.umd.min.js';
+		}
+		var sty = craft('LINK', 0, p);
+		sty.rel = 'stylesheet';
+		sty.href = 'photoswipe.css';
+		craft('STYLE', 0, p).innerText = `.showcase{
+			display: flex;
+			overflow-x: scroll;
+			height: 100%;
+		} .screenshot{
+			flex-shrink: 0;
+			scroll-snap-align: start;
+			margin-right: 12px;
+		} .screenshot img{
+			background-size: contain;
+			border-width: 0;
+			box-shadow: 0 1px 2px 0 rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15);
+			border-radius: 8px;
+			cursor: pointer;
+			height: 204px;
+			min-width: 92px;
+		}`;
+		var showcase = craft(0, 'showcase', p);
+		var imgArr = [];
+		function click_img(e){
+			var H = parseInt(window.innerHeight)/2;
+			for(var i=0;i<imgArr.length;i++) {
+				e = imgArr[i];
+				var h = e.offsetHeight;
+				e.setAttribute('data-pswp-width', parseInt(e.offsetWidth/h*H));
+				e.setAttribute('data-pswp-height', parseInt(e.offsetHeight/h*H));
+			}
+		 }
+		showcase.addEventListener('mousewheel', function(e) {
+			var d=e.detail?-e.detail /3: -e.wheelDelta /120;
+			d = Math[d >= 1 ? 'floor' : 'ceil' ](d);
+			if(d) {
+				showcase.scrollTo({
+					left: showcase.scrollLeft + d*80
+					,behavior: true?'auto':'smooth'
+				});
+			}
+		});
+		for(var i=0;i<imgs.length;i++) {
+			var listitem = craft(0, 'screenshot', showcase);
+			var div = craft('DIV', 0, listitem);
+			var img = craft('IMG', 'img', div);
+			img.src = imgs[i];
+			//div.href = img.src;
+			div.setAttribute('data-pswp-src', img.src);
+			imgArr.push(div); 
+			div.addEventListener('click', click_img, true);
+		}
+		function slideShowInit(){
+			setTimeout(function(){
+				var lightbox = new PhotoSwipeLightbox({
+					gallery: showcase,
+					children: imgArr, //'.img',
+					pswpModule: PhotoSwipe 
+				});
+				lightbox.init();
+			}, 500);
+		}
+		if(waitPS) waitPS.onload = slideShowInit;
+		if(!waitPS) slideShowInit();
+	}
+	function dnav(){
+		if(aboutP && aboutP.style.display!='none')
+			return 0;
+		return 1;
+	}
+	
+	var myPlugin = function (hook, vm) {
     hook.init(function () {
     });
     hook.mounted(function () {
-		// tg
+		//tg
 		setTimeout(function(){
 			debug(gc('sidebar').offsetLeft);
-			if(gc('sidebar').offsetLeft<0){
-				var btn = 'sidebar-toggle-button';
-				gc(btn).click()
-			}
+			//showAbout()
 		}, 0);
     });
 
@@ -55,9 +241,13 @@
       return html;
     });
 
-    // Invoked on each page load after new HTML has been appended to the DOM
     hook.doneEach(function () {
-      // ...
+	  if((location.hash||'').length<3) {
+		if(gc('sidebar').offsetLeft<0){
+			var btn = 'sidebar-toggle-button';
+			gc(btn).click()
+		}
+	  }
     });
 
     // Invoked one time after rendering the initial page
@@ -77,5 +267,14 @@
 <script src="prism-gradle.min.js"></script>
 <script src="prism-yaml.min.js"></script>
 <script src="docsify-copy-code.min.js"></script>
+
+<div id="aboutP">
+	<div id="aboutB" class='sel'>
+		<div id="about">&nbsp;</div>
+		<div id="aboutDict"></div>
+	</div>
+	<!-- <a class="arrwp prev" id="forward"  onclick="prvnxtFrame();"><p class="arrow"/></p></a>
+	<a class="arrwp next" id="recess" onclick="prvnxtFrame(1);"><p class="arrow"/></p></a>  -->
+</div>
 </body>
 </html>

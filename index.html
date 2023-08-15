@@ -53,13 +53,13 @@
 <script>
 	var debug = console.log;
     window.$docsify = {
-        name: '无限大道',
-        nameLink: '/',
-        repo: '',
-        search: 'auto',
-        loadNavbar: true,
-        loadSidebar: true,
-        auto2top: true
+        name: '无限大道'
+        , nameLink: ''
+        , repo: ''
+        , search: 'auto'
+        , loadNavbar: true
+        , loadSidebar: true
+        , auto2top: true
     }
 	
 	var d = document;
@@ -85,7 +85,7 @@
     }
 	
 	d.addEventListener('click', function(e){
-		debug('click', e, e.target);
+		debug('click::', e, e.target);
 		var cc=5, t=e.target;
 		if(t.id=='aboutP') {
 			t.style.display="none";
@@ -126,13 +126,6 @@
 					e.style.display='none';
 				}
 			};
-			 ge('aboutB').addEventListener('click', function(e){
-			 	//stop(e);
-				//data-pswp-width
-				var t = e.target;
-				
-			 }, true);
-			
 		}
 		var testUrl = 'https://www.runoob.com/images/pulpit.jpg';
 		craftIntro(host.shadow
@@ -217,7 +210,7 @@
 		if(!waitPS) slideShowInit();
 	}
 	
-	var sidebar, myPlugin = function (hook, vm) {
+	var myPlugin = function (hook, vm) {
 		hook.init(function () {  });
 		hook.mounted(function () {
 			setTimeout(function(){
@@ -238,15 +231,16 @@
 		// Invoked on each page load after new markdown has been transformed to HTML.
 		// Supports asynchronous tasks (see afterEach documentation for details).
 		hook.afterEach(function (html) {
+			//debug('afterEach', html);
 			return html;
 		});
 
 		hook.doneEach(function () {
-		if((location.hash||'').length<3) {
-			if(gc('sidebar').offsetLeft<0 && !document.body.classList.contains('close')){
-				gc('sidebar-toggle-button').click()
+			if((location.hash||'').length<3) {
+				if(gc('sidebar').offsetLeft<0 && !document.body.classList.contains('close')){
+					gc('sidebar-toggle-button').click()
+				}
 			}
-		}
 		});
 
 		// Invoked one time after rendering the initial page
@@ -259,6 +253,7 @@
 						back : false
 					};
 				dlg.listeners = [function(e){ // down
+					debug('down', e);
 					if(dragState.drag) {
 						dragState.drag = false;
 					}
@@ -346,32 +341,46 @@
 				ae('touchend',dlg.listeners[2]);
 				ae('mouseup',dlg.listeners[2]);
 			} 
-			sidebar = gc('sidebar');
-			var lnks = gts('A', sidebar);
-			//debug('lnks', sidebar.offsetLeft, lnks.length, lnks);
-			for(var i=1;i<lnks.length;i++) {
-				var t=lnks[i];
-				debug('lnks', t.parentNode.tagName=='H1', sidebar.contains(t));
-				if(t.parentNode.tagName=='H1' && sidebar.contains(t)){
-					t.onclick = function(e){
-						t = e.target;
-						stop(e);
-						debug(e, e.target, e.srcElement);
-						showAbout(t.parentNode.id);
-					}
-				}
-			}
+		
+			//initSidebar()
 		});
   };
+  
+	function initSidebar(){
+		var sidebar = gc('sidebar');
+		var lnks = gts('A', sidebar);
+		debug('lnks', sidebar.offsetLeft, lnks.length, lnks);
+		for(var i=1;i<lnks.length;i++) {
+			var t=lnks[i];
+			debug('lnks', t.parentNode.tagName=='H1', sidebar.contains(t));
+			if(t.parentNode.tagName=='H1' && sidebar.contains(t)){
+				t.onclick = function(e){
+					debug('H1', e, e.target, e.srcElement);
+					t = e.target;
+					stop(e);
+					showAbout(t.parentNode.id);
+				}
+			}
+		}
+		lnks[0].onclick = function(e){
+			//stop(e);
+		}
+	}
 	
 	function dnav(e){
 		//debug('dnav', e.target);
-		if(sidebar==(e.target))
+		if(gc('sidebar')==(e.target))
 			return 0;
 		if(aboutP && aboutP.style.display!='none')
 			return 0;
 		return 1;
 	}
+	function dnav_sidebar(e){
+		debug('dnav_sidebar');
+		setTimeout(initSidebar, 350);
+	}
+	
+	var dnav0 = dnav;
 
 	// Add plugin to docsify's plugin array
 	$docsify = $docsify || {};

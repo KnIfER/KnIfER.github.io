@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="vue.css">
+</head>
+<body>
+<div id="app">我的应用集</div>
+<script>
+	var debug = console.log;
+    window.$docsify = {
+        name: '无限大道',
+        nameLink: '/',
+        repo: '',
+        search: 'auto',
+        loadNavbar: true,
+        loadSidebar: true,
+        auto2top: true
+    }
+	
+	var d = document;
+	function ge(e){return d.getElementById(e)};
+	function gc(e,p){return (p||d).getElementsByClassName(e)[0]};
+	
+	
+	
+	 var myPlugin = function (hook, vm) {
+    hook.init(function () {
+    });
+    hook.mounted(function () {
+		// tg
+		setTimeout(function(){
+			debug(gc('sidebar').offsetLeft);
+			if(gc('sidebar').offsetLeft<0){
+				var btn = 'sidebar-toggle-button';
+				gc(btn).click()
+			}
+		}, 0);
+    });
+
+    // Invoked on each page load before new markdown is transformed to HTML.
+    // Supports asynchronous tasks (see beforeEach documentation for details).
+    hook.beforeEach(function (markdown) {
+      debug('beforeEach', markdown)
+	  markdown = markdown.replaceAll('\n优化：', '\n<font color=\'#008800\'>优化：</font>');
+	  markdown = markdown.replaceAll('\n新增：', '\n<font color=\'#2bbeFF\'>新增：</font>');
+      return markdown;
+    });
+
+    // Invoked on each page load after new markdown has been transformed to HTML.
+    // Supports asynchronous tasks (see afterEach documentation for details).
+    hook.afterEach(function (html) {
+      return html;
+    });
+
+    // Invoked on each page load after new HTML has been appended to the DOM
+    hook.doneEach(function () {
+      // ...
+    });
+
+    // Invoked one time after rendering the initial page
+    hook.ready(function () {
+      // ...
+    });
+  };
+
+  // Add plugin to docsify's plugin array
+  $docsify = $docsify || {};
+  $docsify.plugins = [].concat(myPlugin, $docsify.plugins || []);
+	
+</script>
+<script src="docsify.min.js"></script>
+<script src="search.min.js"></script>
+<script src="prism-java.min.js"></script>
+<script src="prism-gradle.min.js"></script>
+<script src="prism-yaml.min.js"></script>
+<script src="docsify-copy-code.min.js"></script>
+</body>
+</html>

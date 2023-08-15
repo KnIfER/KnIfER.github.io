@@ -92,10 +92,10 @@
 			stop(e);
 			return;
 		}
-		while(t.tagName!='A' && cc-->0) {
+		while(t && t.tagName!='A' && cc-->0) {
 			t=t.parentNode;
 		}
-		if(t.tagName=='A') {
+		if(t && t.tagName=='A') {
 			if(gc('app-nav no-badge').contains(t)){
 				setTimeout(function(){
 					if(gc('sidebar').offsetLeft<0 && !document.body.classList.contains('close')){
@@ -351,7 +351,7 @@
 			//debug('lnks', sidebar.offsetLeft, lnks.length, lnks);
 			for(var i=1;i<lnks.length;i++) {
 				var t=lnks[i];
-				//debug('lnks', t.parentNode.tagName=='H1', sidebar.contains(t));
+				debug('lnks', t.parentNode.tagName=='H1', sidebar.contains(t));
 				if(t.parentNode.tagName=='H1' && sidebar.contains(t)){
 					t.onclick = function(e){
 						t = e.target;

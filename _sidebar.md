@@ -4,6 +4,7 @@
 
 # 无限书签扩展
 - [v2.5](content/无限书签_devlog.md)
+- [首秀](content/无限书签_首秀.md)
 
 
 

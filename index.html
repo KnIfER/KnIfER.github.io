@@ -46,6 +46,9 @@
 		  overflow-y: auto;
 		  filter: drop-shadow(2px 2px 6px #8f8fffef);
 		}
+		.bf{
+			font-size: 150%;
+		}
     </style>
 </head>
 <body>
@@ -143,18 +146,18 @@
 				]);
 		}
 		if('无限书签扩展'==id) {
-			var testUrl = 'https://www.runoob.com/images/pulpit.jpg';
 			craftIntro(host.shadow
-				, `通过双层标签页结构和强大的右键菜单等功能，帮助用户更好地管理和使用书签。
+				, `<font class='bf'>通过</font>双层标签页结构和强大的右键菜单等功能，帮助用户更好地管理和使用书签。
 
-界面有三个部分：分组栏、小页面标签栏、小页面内容。右键新建分组；小页面可以分为五大类型：书签、重要页面、搜索引擎、嵌入网站和自定义页面。
+<font class='bf'>界面</font>有三个部分：分组栏、小页面标签栏、小页面内容。右键新建分组；小页面可以分为五大类型：书签、重要页面、搜索引擎、嵌入网站和自定义页面。
 
-书签的地址栏可以搜索，通过收藏与定位按钮，用户可以轻松管理收藏。
+<font class='bf'>书签地址栏</font>可以搜索，通过收藏与定位按钮，用户可以轻松管理收藏。
 
-<a href="https://www.zhihu.com/question/49117104/answer/3246147287">更多介绍：</a>`
-				, [testUrl
-				, testUrl
-				, testUrl
+<a href="https://www.zhihu.com/question/49117104/answer/3246147287">详情请看更多介绍…</a>`
+				, [
+					'content/无限书签/效果图1.png'
+					,'https://raw.githubusercontent.com/KnIfER/KnIfER.github.io/master/content/无限书签/效果图1.png'
+					,'master/content/无限书签/效果图1.png'
 				]);
 		}
 	}

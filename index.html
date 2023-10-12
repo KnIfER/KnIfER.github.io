@@ -106,8 +106,13 @@
 		}
 	}, true);
 	var aboutP;
-	function showAbout(id) {
+	function showAbout(el) {
 		var aboutPage = ge("about");
+		var t=el, id;
+		while(t && !id) {
+			id = t.id;
+			t = t.parentNode;
+		}
 		ge('aboutDict').innerText=id;
 		aboutP ||= ge('aboutP');
 		aboutP.style.display="block";
@@ -127,13 +132,31 @@
 				}
 			};
 		}
-		var testUrl = 'https://www.runoob.com/images/pulpit.jpg';
-		craftIntro(host.shadow
-			, "<font color='blue'>无限星辰</font>词典app，用于离线查词，支持模糊搜索、正则搜索、搜索引擎。<br/><br/>"
-			, [testUrl
-			, testUrl
-			, testUrl
-			]);
+		debug('showAbout id=', id, el);
+		if('无限星辰词典'==id) {
+			var testUrl = 'https://www.runoob.com/images/pulpit.jpg';
+			craftIntro(host.shadow
+				, "<font color='blue'>无限星辰词典</font>app，用于离线查词，支持模糊搜索、正则搜索、搜索引擎。<br/><br/>"
+				, [testUrl
+				, testUrl
+				, testUrl
+				]);
+		}
+		if('无限书签扩展'==id) {
+			var testUrl = 'https://www.runoob.com/images/pulpit.jpg';
+			craftIntro(host.shadow
+				, `通过双层标签页结构和强大的右键菜单等功能，帮助用户更好地管理和使用书签。
+
+界面有三个部分：分组栏、小页面标签栏、小页面内容。右键新建分组；小页面可以分为五大类型：书签、重要页面、搜索引擎、嵌入网站和自定义页面。
+
+书签的地址栏可以搜索，通过收藏与定位按钮，用户可以轻松管理收藏。
+
+<a href="https://www.zhihu.com/question/49117104/answer/3246147287">更多介绍：</a>`
+				, [testUrl
+				, testUrl
+				, testUrl
+				]);
+		}
 	}
 	
 	function craftIntro(p, head, imgs){
@@ -351,16 +374,18 @@
 		var lnks = gts('A', sidebar);
 		debug('lnks', sidebar.offsetLeft, lnks.length, lnks);
 		for(var i=1;i<lnks.length;i++) {
-			var t=lnks[i];
-			debug('lnks', t.parentNode.tagName=='H1', sidebar.contains(t));
-			if(t.parentNode.tagName=='H1' && sidebar.contains(t)){
-				t.onclick = function(e){
-					debug('H1', e, e.target, e.srcElement);
-					t = e.target;
-					stop(e);
-					showAbout(t.parentNode.id);
+			(()=>{
+				var t=lnks[i];
+				debug('lnks', t.parentNode.tagName=='H1', sidebar.contains(t));
+				if(t.parentNode.tagName=='H1' && sidebar.contains(t)){
+					t.onclick = function(e){
+						debug('H1', e, e.target, e.srcElement);
+						t = e.target;
+						stop(e);
+						showAbout(t);
+					}
 				}
-			}
+			})();
 		}
 		lnks[0].onclick = function(e){
 			//stop(e);

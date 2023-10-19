@@ -1,4 +1,9 @@
 ## 公告
+[github 下载地址](https://github.com/KnIfER/chrome-InfiniteBookmarkExtensions)     进入download文件夹，下载其中的zip文件
+
+[云盘 ☁️ 下载地址](https://wwtm.lanzouq.com/b0a74sola)  输入提取码：5b14 下载最新的zip文件。
+
+安装：解压zip后以开发者模式加载。
 
 ## v2.7
 新增： 添加当前页面到“重要页面”后，可右击保存会话数据（sessionStorage）与页面滚动位置，右击恢复。

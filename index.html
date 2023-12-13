@@ -57,15 +57,19 @@
 <body>
 <div id="app">我的应用集</div>
 <script>
-	var debug = console.log;
+	var debug = console.log, zh=navigator.language.startsWith('zh');
+	
+	window.docLang = zh?'':'_en';
+	
     window.$docsify = {
-        name: '无限大道'
+        name: zh?'无限大道':'THE WAY'
         , nameLink: ''
         , repo: ''
         , search: 'auto'
         , loadNavbar: true
-        , loadSidebar: true
+        , loadSidebar: "_sidebar"+docLang+".md"
         , auto2top: true
+		, homepage : "README"+docLang+".md"
     }
 	
 	var d = document;

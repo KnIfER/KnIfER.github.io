@@ -3,18 +3,18 @@
 - [mdx fileformat](content/无限星辰/fileformat_svg.md)
 
 # Infinite Bookmark Extensions
-- [v3.5](content/无限书签_devlog.md)
+- [v3.5](content/InfiniteBookmarks_devlog.md)
 - ---
-- [Introduction](content/无限书签/使用说明.md)
-- [Bookmark "slide show"](content/无限书签/书签幻灯片.md)
-- [Zero memory tabs](content/无限书签/零内存标签页.md)
-- [Save tabs](content/无限书签/如何保存滚动位置等会话数据.md)
-- [Search tabs](content/无限书签/标签页搜索.md)
-- [Pagelets](content/无限书签/自定义页面.md)
+- [Introduction](content/InfiniteBookmarks/Introduction.md)
+- [Bookmark "slide show"](content/InfiniteBookmarks/Bookmark-SlideShow.md)
+- [Zero memory tabs](content/InfiniteBookmarks/Zero-Memory-Tabs.md)
+- [Save tabs](content/InfiniteBookmarks/Save-Tabs.md)
+- [Search tabs](content/InfiniteBookmarks/Search-Tabs.md)
+- [Pagelets](content/InfiniteBookmarks/Pagelets.md)
 - ---
-- [Bookmark thumbnails 🖼️](content/无限书签/书签缩略图.md)
+- [Bookmark thumbnails 🖼️](content/InfiniteBookmarks/Bookmark-thumbnails.md)
 - ---
-- [Read aloud 🔊](content/无限书签/大声朗读.md)
+- [Read aloud 🔊](content/InfiniteBookmarks/Read-Aloud.md)
 
 
     

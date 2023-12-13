@@ -12,7 +12,7 @@
 - [Search tabs](content/InfiniteBookmarks/Search-Tabs.md)
 - [Pagelets](content/InfiniteBookmarks/Pagelets.md)
 - ---
-- [Bookmark thumbnails 🖼️](content/InfiniteBookmarks/Bookmark-thumbnails.md)
+- [Bookmark thumbnails 🖼️](content/InfiniteBookmarks/Introduction?id=bookmark-thumbnails)
 - ---
 - [Read aloud 🔊](content/InfiniteBookmarks/Read-Aloud.md)
 

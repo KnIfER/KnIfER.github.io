@@ -1,4 +1,4 @@
-## Best bookmark manager for Mordern Browsers. 
+## Best local bookmark manager for Mordern Browsers. 
 
 ## Dual-layered Tab System
 
@@ -55,9 +55,9 @@ Next, we will introduce the bookmark mini tab. We will discuss the rest later~
 
 ## Bookmark Mini Tab
 
-The mini bookmark page comprises an address bar and a list. The address bar (mini ominibox) is horizontally divided from left to right, featuring the address bar itself, a search box within the folder, a go-to-top button, a go-to-bottom button, a star button, and a reverse order button.  
+The mini bookmark page comprises an address bar and a list. The address bar (i.e. mini ominibox) is horizontally divided from left to right, featuring the address bar itself, a search box within the folder, a go-to-top button, a go-to-bottom button, a star button, and a reverse order button.  
 
-To utilize the address bar, you can input the bookmark ID (number) and then press the enter key, or you can enter the complete bookmark URL, such as chrome://bookmarks/?id=1. The bookmark ID can be obtained by accessing the native bookmark manager.   
+To utilize the address bar, you can input the bookmark ID (number) and then press the <kdb>Enter</kdb> key, or you can enter the complete bookmark URL, such as chrome://bookmarks/?id=1. The bookmark ID can be obtained by accessing the native bookmark manager.   
 
 Alternatively, you can perform a search by entering characters directly into the address bar and pressing enter. The search function within the folder has not been implemented yet.  
 
@@ -65,7 +65,7 @@ Alternatively, you can perform a search by entering characters directly into the
 
 ![](p)
 
-**To locate the bookmark folder**, simply right-click on the star button. This action initiates a highlighted animation on the target line, indicating the folder where your bookmark for the current browsing page will be placed.  
+**To locate the bookmark folder**, simply right-click on the star button. This action play a highlight animation on the target line.  
 
 The reverse button serves as a toggle, allowing you to switch between reverse or sequential sorting. 
 
@@ -75,7 +75,7 @@ The reverse button serves as a toggle, allowing you to switch between reverse or
 
 **Right-click on the list** enables you to directly add or move favorites below the current line. Manage your bookmarks while you are creating them!  
 
-![Image](https://chat-shared3.zhile.io/p)
+![Image]()
 
 
 The right-click menu provides top buttons for seamlessly switching between menu groups. Within the context of bookmark mini tabs, you'll find "Manage" and "Navigate" menus, each serving distinct purposes.
@@ -109,7 +109,7 @@ The address (and type) of mini tabs can also be altered by right-clicking on **"
 ![](p)
 
 
-## Further sub-division of bookmark mini tab and it's addresses.
+## Further subdivision of bookmark mini tab and it's addresses.
 
 Bookmark mini tabs can be further divided into three types: 
 
@@ -127,15 +127,30 @@ Bookmark mini tabs can be further divided into three types:
 -   **Multiple Choice**
     
     -   (Similar to Explorer etc. ) : Hold <kbd>Ctrl</kbd> and click to toggle selection.
-    -   Hold <kbd>Shift</kbd> and click twice in different list positions to select between them. 
-    -   (Difference) : Use *right-click-drag* to trigger **box-selection**, instead of left-click and drag;
+    -   Hold <kbd>Shift</kbd> and click twice in different positions in list to select between them. 
+    -   (Difference) : Use *right-click-drag* to trigger **box-selection**, instead of *left-click-drag*;
 	
 -   **Drag and Sort**
     
     -   Unlike other programs, drag-and-drop sorting in this extension doesn't require keeping the mouse down all the time. Instead, <u>with a gentle drag</u>, you can release all buttons, scroll the list to the desired position, and finally <u>confirm with a left-click</u> or cancel with a right-click.
+	-	Hold <kbd>Ctrl</kbd> before left-click confirmation will duplicate instead of move selected bookmarks.
     -   Immediately after the "gentle drag", you can even switch to mini tab of a different bookmark folder (even in different tab group), and then confirm the modification by a simple click, making cross-folder management very convenient and leading the way.
 
 ![](p)
+
+
+## Bookmark Thumbnails
+
+You have the option to manually add one or more thumbnails to a bookmark. Begin by copying the image to the clipboard or taking a screenshot to the clipboard. Next, right-click on the bookmark list line and press <kbd>V</kbd> to paste the thumbnail. If you want to replace it, right-click on the image and then press <kbd>B</kbd>.
+
+AutohotKey scripts can be employed to facilitate taking and copying screenshots to clipboard.
+
+Please note that the bookmark thumbnail feature is experimental and has a relatively straightforward layout. Horizontal images  may display two columns in one row, while vertical images may display four columns in one row.
+
+The storage mechanism is also relatively simple. Image data is stored in the extension local storage space, with the bookmark ID serving as the key (though not ideal for synchronization). Be cautious during the testing phase, as the data may be lost in the event of storage failure or other bugs. It is advisable to make backups frequently.
+
+The plan is to implement more layout styles that can be combined with user scripts to enable automatic thumbnail generation. Eventually, these thumbnails will be saved on a local server with the URL serving as the key.
+
 
 
 That concludes the introduction to the Infinite Bookmark Extensions. I've covered the fundamentals of how to use it for bookmark management. Note that the plural form is used in the last word, "Extensions," signifying that this extension is versatile, and its capabilities will continually strengthen as I continuously use and improve it.
